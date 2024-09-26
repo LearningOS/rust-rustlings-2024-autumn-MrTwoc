@@ -11,7 +11,6 @@
 // Execute `rustlings hint iterators5` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 use std::collections::HashMap;
 
@@ -35,7 +34,14 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map is a hashmap with String keys and Progress values.
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+    // todo!();
+    //注释：
+    // map.values() 返回一个迭代器，它遍历map中所有的值。
+    // filter(|&val| val == &value) 过滤掉所有不等于value的值。
+
+    map.values()
+        .filter(|&val| val == &value)
+        .count()
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -54,7 +60,14 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection is a slice of hashmaps.
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
+    // todo!();
+
+    //注释：
+    // collection.iter() 返回一个迭代器，它遍历collection中所有的map。
+    // fold(0, |acc, map| ...) 计算所有map中等于value的值的数量。
+    collection.iter().fold(0, |acc, map| {
+        acc + map.values().filter(|&val| val == &value).count()
+    })
 }
 
 #[cfg(test)]
